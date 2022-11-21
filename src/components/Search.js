@@ -1,11 +1,11 @@
 function Search() {
   return (
     <div className="bg-green-700 pt-10">
-      <div className="mx-auto container py-10 px-6">
+      <div className="mx-auto container py-10 px-6 w-11/12 md:w-2/3 max-w-lg">
         <div className="shadow mx-auto w-full dark:bg-gray-800 bg-white dark:border-gray-700 rounded-lg border border-gray-400 py-4 px-4">
           <div className="flex justify-start items-center relative">
             <input
-              className="text-sm leading-none text-left text-gray-600 px-4 py-3 w-full border rounded border-gray-300  outline-none"
+              className="text-sm leading-none text-left text-gray-600 px-4 py-3 w-full border rounded border-gray-300 bg-transparent dark:text-gray-100 outline-none"
               type="text"
               placeholder="Search"
             />

@@ -1,20 +1,18 @@
-import React, { useContext, useState } from "react";
-import { AppContext } from "../app-context";
+import React, { useState } from "react";
+import { useAppContext } from "../app-context";
 import InputControl from "./InputControl";
 
 function Fab() {
-  const context = useContext(AppContext);
+  const context = useAppContext();
+  let { data, updateAppData } = context;
 
-  let { data, updateData } = context;
-
+  const colors = ["Default", "Pink", "Blue", "Red", "Yellow"];
   const [modalOpen, modalStateHandler] = useState(false);
   const [formValues, updateFormValues] = useState({
     title: "",
     details: "",
     color: "Default",
   });
-
-  const colors = ["Default", "Pink", "Blue", "Red", "Yellow"];
 
   const modalHandler = (arg) => {
     arg === false &&
@@ -31,11 +29,11 @@ function Fab() {
   };
 
   const submitHandler = () => {
-    let { notes } = data;
-    let newData = [...notes, formValues];
-    console.log("context", context, formValues, newData);
-    updateData(newData);
-    modalStateHandler(false);
+    let newData = [...data];
+    let dataToPush = { ...formValues, date: Date.now() };
+    newData.push(dataToPush);
+    updateAppData(newData);
+    modalHandler(false);
   };
 
   return (
@@ -60,15 +58,15 @@ function Fab() {
             role="alert"
             className="container mx-auto w-11/12 md:w-2/3 max-w-lg"
           >
-            <div className="relative py-8 px-5 md:px-10 bg-white shadow-md rounded border border-gray-400">
-              <h1 className="text-gray-800 font-lg font-bold tracking-normal leading-tight mb-4">
+            <div className="relative py-8 px-5 md:px-10 bg-white shadow-md rounded border border-gray-400 dark:bg-gray-800 dark:border-gray-700">
+              <h1 className="text-gray-800 dark:text-gray-100 font-lg font-bold tracking-normal leading-tight mb-4">
                 Add New Note
               </h1>
 
               <InputControl
                 name="title"
                 type="text"
-                className={`mb-5 mt-2 text-gray-600 focus:outline-none font-normal w-full flex items-center py-3 px-3 text-sm border-gray-300 rounded border ${
+                className={`mb-5 mt-2 text-gray-600 dark:text-gray-100 focus:outline-none font-normal w-full flex items-center py-3 px-3 text-sm border-gray-300 rounded border bg-transparent ${
                   formValues.title.length === 60 && " border-yellow-600"
                 }`}
                 value={formValues.title}
@@ -81,7 +79,7 @@ function Fab() {
               <InputControl
                 name="details"
                 type="textarea"
-                className={`mb-5 mt-2 text-gray-600 focus:outline-none font-normal w-full flex items-center py-3 px-3 text-sm border-gray-300 rounded border ${
+                className={`mb-5 mt-2 text-gray-600 dark:text-gray-100 focus:outline-none font-normal w-full flex items-center py-3 px-3 text-sm border-gray-300 rounded border bg-transparent ${
                   formValues.details.length === 255 && " border-yellow-600"
                 }`}
                 value={formValues.details}
@@ -92,7 +90,7 @@ function Fab() {
                 rows="4"
               />
 
-              <label className="text-gray-800 text-sm font-bold leading-tight tracking-normal">
+              <label className="text-gray-800 dark:text-gray-100 text-sm font-bold leading-tight tracking-normal">
                 Color:
               </label>
 

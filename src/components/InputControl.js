@@ -31,7 +31,7 @@ export class InputControl extends Component {
         {label && (
           <label
             htmlFor={inputProps.id}
-            className="text-gray-800 text-sm font-bold leading-tight tracking-normal"
+            className="text-gray- dark:text-gray-100 text-sm font-bold leading-tight tracking-normal"
           >
             {label}:
           </label>
