@@ -4,7 +4,6 @@ import { useAppContext, useModalContext } from "../app-context";
 
 function Modal() {
   const colors = ["Default", "Pink", "Blue", "Red", "Yellow"];
-  let buttonTitle = "Submit";
 
   const context = useAppContext();
   let { notes, updateNotes, editData, editDataHandler } = context;
@@ -19,7 +18,6 @@ function Modal() {
   });
 
   useEffect(() => {
-    console.log("editData", editData);
     if (editData) {
       updateFormValues(editData);
     }

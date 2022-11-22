@@ -19,6 +19,7 @@ export function AppContextProvider({ children }) {
   useEffect(() => {
     document.title = "Websmith Notes";
     let defaultNotes = localStorage.getItem("my_notes");
+    if (!defaultNotes) defaultNotes = "[]";
 
     if (
       defaultNotes !== "" &&
@@ -27,7 +28,6 @@ export function AppContextProvider({ children }) {
       defaultNotes !== "undefined"
     ) {
       defaultNotes = JSON.parse(defaultNotes);
-      console.log("Local notes fetched...", defaultNotes);
       updateNotes(defaultNotes);
     } else {
       console.log("Local notes fetched, nothing found.");

@@ -40,10 +40,6 @@ function Note(props) {
     modalStateHandler(true);
     let dataToEdit = notes.find((note) => note.date === id);
     editDataHandler(dataToEdit);
-    //   const updatedNotes = notes.map((note) =>
-    //     note.date === id ? { ...note, ...formvalues } : note
-    //   );
-    //   updateNotes(updatedNotes);
   };
 
   return (
@@ -54,18 +50,21 @@ function Note(props) {
         <h4 className="text-gray-800 dark:text-gray-100 font-bold mb-3">
           {note.title}
         </h4>
-        <p className="text-gray-800 dark:text-gray-100 text-sm mb-5 whitespace-pre-wrap">
+        <p className="text-gray-800 dark:text-gray-100 text-sm mb-5 whitespace-pre-wrap break-all">
           {note.details}
         </p>
       </div>
       <div>
         <div className="flex items-center justify-end text-gray-800 dark:text-gray-100">
           <p className="text-sm mr-auto">
-            {note.date && new Date(note.date).toLocaleDateString()}
+            {note.date &&
+              new Date(note.date).toLocaleDateString() +
+                ", " +
+                new Date(note.date).toLocaleTimeString()}
           </p>
           <button
             type="button"
-            className="w-8 h-8 ml-4 rounded-full bg-gray-800 dark:bg-gray-100 dark:text-gray-800 text-white flex items-center justify-center"
+            className="w-8 h-8 ml-2 rounded-full bg-gray-800 dark:bg-gray-100 dark:text-gray-800 text-white flex items-center justify-center"
             onClick={() => editNote(note.date)}
           >
             <svg
@@ -88,7 +87,7 @@ function Note(props) {
 
           <button
             type="button"
-            className="w-8 h-8 ml-4 rounded-full bg-gray-800 dark:bg-gray-100 dark:text-gray-800 text-white flex items-center justify-center"
+            className="w-8 h-8 ml-2 rounded-full bg-gray-800 dark:bg-gray-100 dark:text-gray-800 text-white flex items-center justify-center"
             onClick={() => removeNote(note.date)}
           >
             <svg
