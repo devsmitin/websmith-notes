@@ -129,8 +129,9 @@ function Modal() {
             <div className="flex items-center justify-start w-full">
               <button
                 type="button"
-                className="focus:outline-none transition duration-150 ease-in-out hover:bg-green-600 bg-green-700 rounded text-white px-8 py-2 text-sm"
+                className="focus:outline-none transition duration-150 ease-in-out hover:bg-green-600 bg-green-700 rounded text-white px-8 py-2 text-sm disabled:cursor-not-allowed disabled:hover:bg-green-700"
                 onClick={() => submitHandler(false)}
+                disabled={formValues.title === "" || formValues.details === ""}
               >
                 {!editData ? "Submit" : "Update"}
               </button>
