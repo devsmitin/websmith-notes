@@ -1,7 +1,9 @@
+import { AppContextProvider } from "./app-context";
+
 import Search from "./components/Search";
 import Notes from "./components/Notes";
 import Fab from "./components/Fab";
-import { AppContextProvider } from "./app-context";
+import Modal from "./components/Modal";
 
 import "./App.css";
 
@@ -12,6 +14,7 @@ function App() {
         <Search />
         <Fab />
         <Notes />
+        <Modal />
       </AppContextProvider>
     </div>
   );

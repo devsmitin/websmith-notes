@@ -1,20 +1,60 @@
 import React from "react";
+import { useAppContext, useModalContext } from "../app-context";
 
 function Note(props) {
+  const context = useAppContext();
+  let { notes, updateNotes, editDataHandler } = context;
+
+  const modalContext = useModalContext();
+  let { modalStateHandler } = modalContext;
+
   let { note } = props;
-  let colorClass =
-    note.color === "Default"
-      ? "bg-white border-gray-400 dark:bg-gray-800 dark:border-gray-700"
-      : `bg-${note.color.toLowerCase()}-300 border border-${note.color.toLowerCase()}-300`;
+
+  let colorClass;
+
+  switch (note.color) {
+    case "Pink":
+      colorClass = "bg-pink-300 border-pink-300";
+      break;
+    case "Blue":
+      colorClass = "bg-blue-300 border-blue-300";
+      break;
+    case "Red":
+      colorClass = "bg-red-300 border-red-300";
+      break;
+    case "Yellow":
+      colorClass = "bg-yellow-300 border-yellow-300";
+      break;
+    default:
+      colorClass =
+        "bg-white border-gray-400 dark:bg-gray-800 dark:border-gray-700";
+      break;
+  }
+
+  const removeNote = (id) => {
+    let updatedNotes = notes.filter((note) => note.date !== id);
+    updateNotes(updatedNotes);
+  };
+
+  const editNote = (id) => {
+    modalStateHandler(true);
+    let dataToEdit = notes.find((note) => note.date === id);
+    editDataHandler(dataToEdit);
+    //   const updatedNotes = notes.map((note) =>
+    //     note.date === id ? { ...note, ...formvalues } : note
+    //   );
+    //   updateNotes(updatedNotes);
+  };
+
   return (
     <div
-      className={`w-full h-64 flex flex-col justify-between rounded-lg border lg:mb-6 py-5 px-4 ${colorClass}`}
+      className={`w-full min-h-fit flex flex-col justify-between rounded-lg border lg:mb-6 py-5 px-4 ${colorClass}`}
     >
       <div>
         <h4 className="text-gray-800 dark:text-gray-100 font-bold mb-3">
           {note.title}
         </h4>
-        <p className="text-gray-800 dark:text-gray-100 text-sm">
+        <p className="text-gray-800 dark:text-gray-100 text-sm mb-5 whitespace-pre-wrap">
           {note.details}
         </p>
       </div>
@@ -26,6 +66,7 @@ function Note(props) {
           <button
             type="button"
             className="w-8 h-8 ml-4 rounded-full bg-gray-800 dark:bg-gray-100 dark:text-gray-800 text-white flex items-center justify-center"
+            onClick={() => editNote(note.date)}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -48,6 +89,7 @@ function Note(props) {
           <button
             type="button"
             className="w-8 h-8 ml-4 rounded-full bg-gray-800 dark:bg-gray-100 dark:text-gray-800 text-white flex items-center justify-center"
+            onClick={() => removeNote(note.date)}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
