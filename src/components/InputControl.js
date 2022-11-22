@@ -1,58 +1,44 @@
-import React, { Component } from "react";
-export class InputControl extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: this.props.value || "",
-    };
-  }
+import React, { useEffect, useState } from "react";
 
-  componentDidUpdate(prevProps, prevState) {
-    if (this.props.value !== prevProps.value) {
-      this.setState({ value: this.props.value });
-    }
-  }
+function InputControl(props) {
+  const { label, value, ...inputProps } = props;
 
-  onChange = (e) => {
-    let { handler, id } = this.props;
+  const [localValue, valueHandler] = useState(value || "");
+  const nontext_elms = ["textarea", "select", "checkbox", "radio"];
+
+  useEffect(() => {
+    valueHandler(props.value);
+  }, [props.value, valueHandler]);
+
+  const onChange = (e) => {
     const target = e.target;
-    const value = target.type === "checkbox" ? target.checked : target.value;
-    this.setState({ value }, () => {
-      handler(id, value);
-    });
+    const newValue = target.type === "checkbox" ? target.checked : target.value;
+    valueHandler(newValue);
   };
 
-  render() {
-    const { label, value, handler, ...inputProps } = this.props;
-    const nontext_elms = ["textarea", "select", "checkbox", "radio"];
-    return (
-      <>
-        {label && (
-          <label
-            htmlFor={inputProps.id}
-            className="text-gray- dark:text-gray-100 text-sm font-bold leading-tight tracking-normal"
-          >
-            {label}:
-          </label>
-        )}
+  return (
+    <>
+      {label && (
+        <label
+          htmlFor={inputProps.id}
+          className="text-gray- dark:text-gray-100 text-sm font-bold leading-tight tracking-normal"
+        >
+          {label}:
+        </label>
+      )}
 
-        {this.props.type === "textarea" && (
-          <textarea
-            value={this.state.value}
-            onChange={this.onChange}
-            {...inputProps}
-          ></textarea>
-        )}
-        {!nontext_elms.includes(this.props.type) && (
-          <input
-            value={this.state.value}
-            onChange={this.onChange}
-            {...inputProps}
-          />
-        )}
-      </>
-    );
-  }
+      {props.type === "textarea" && (
+        <textarea
+          value={localValue}
+          onChange={onChange}
+          {...inputProps}
+        ></textarea>
+      )}
+      {!nontext_elms.includes(props.type) && (
+        <input value={localValue} onChange={onChange} {...inputProps} />
+      )}
+    </>
+  );
 }
 
 export default InputControl;
