@@ -114,7 +114,7 @@ function Modal() {
                       checked={color === formValues.color}
                       onChange={inputsHandler}
                     />
-                    <div className="check-icon hidden border-4 border-indigo-700 rounded-full w-full h-full z-1" />
+                    <div className="check-icon hidden border-4 border-green-700 rounded-full w-full h-full z-1" />
                   </div>
                   <label
                     htmlFor={color.toLowerCase()}
