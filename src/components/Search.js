@@ -4,7 +4,7 @@ function Search() {
       <div className="mx-auto container py-10 px-6 w-11/12 md:w-2/3 max-w-lg">
         <div className="flex justify-start items-center relative">
           <input
-            className="text-sm leading-none text-left px-4 py-3 w-full rounded-md bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-100 outline-none border border-gray-800 shadow-md"
+            className="text-sm leading-none text-left px-4 py-3 w-full rounded-md bg-white dark:bg-transparent text-gray-600 dark:text-gray-100 outline-none border border-gray-800 dark:border-gray-500 shadow-md"
             type="text"
             placeholder="Search"
           />

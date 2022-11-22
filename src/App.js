@@ -9,7 +9,7 @@ import "./App.css";
 
 function App() {
   return (
-    <div className="min-h-screen dark:bg-gray-900">
+    <div className="min-h-screen dark:bg-gray-700">
       <AppContextProvider>
         <Search />
         <Fab />
