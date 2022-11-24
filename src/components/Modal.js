@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import InputControl from "./InputControl";
 import { useAppContext, useModalContext } from "../app-context";
+import InputControl from "./InputControl";
 
 function Modal() {
   const colors = ["Default", "Pink", "Blue", "Red", "Yellow"];
@@ -34,7 +34,7 @@ function Modal() {
     modalStateHandler(arg);
   };
 
-  const inputsHandler = (e) => {
+  const inputHandler = (e) => {
     updateFormValues({ ...formValues, [e.target.name]: e.target.value });
   };
 
@@ -77,7 +77,7 @@ function Modal() {
                 formValues.title.length === 60 && " border-yellow-600"
               }`}
               value={formValues.title}
-              onChange={inputsHandler}
+              onChange={inputHandler}
               maxLength="60"
               placeholder="Title"
               label="Title"
@@ -90,7 +90,7 @@ function Modal() {
                 formValues.details.length === 255 && " border-yellow-600"
               }`}
               value={formValues.details}
-              onChange={inputsHandler}
+              onChange={inputHandler}
               maxLength="255"
               placeholder="Details"
               label="Details"
@@ -112,7 +112,7 @@ function Modal() {
                       id={color.toLowerCase()}
                       value={color}
                       checked={color === formValues.color}
-                      onChange={inputsHandler}
+                      onChange={inputHandler}
                     />
                     <div className="check-icon hidden border-4 border-green-700 rounded-full w-full h-full z-1" />
                   </div>

@@ -44,7 +44,7 @@ function Note(props) {
 
   return (
     <div
-      className={`w-full min-h-fit flex flex-col justify-between rounded-lg border lg:mb-6 py-5 px-4 ${colorClass}`}
+      className={`w-full min-h-fit flex flex-col justify-between rounded-lg border py-5 px-4 ${colorClass}`}
     >
       <div>
         <h4 className="text-gray-800 dark:text-gray-100 font-bold mb-3">
@@ -55,7 +55,7 @@ function Note(props) {
         </p>
       </div>
       <div>
-        <div className="flex items-center justify-end text-gray-800 dark:text-gray-100">
+        <div className="flex flex-wrap items-center justify-end text-gray-800 dark:text-gray-100">
           <p className="text-sm mr-auto">
             {note.date &&
               new Date(note.date).toLocaleDateString() +
